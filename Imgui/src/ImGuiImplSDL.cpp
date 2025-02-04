@@ -50,17 +50,17 @@ ImGuiImplSDL::ImGuiImplSDL(const ImGuiDiligentCreateInfo& CI,
             break;
         case RENDER_DEVICE_TYPE_D3D11:
         case RENDER_DEVICE_TYPE_D3D12:
-            ImGui_ImplSDL2_InitForD3D(pWindow);
+            ImGui_ImplSDL3_InitForD3D(pWindow);
             break;
         case RENDER_DEVICE_TYPE_GL:
         case RENDER_DEVICE_TYPE_GLES:
-            ImGui_ImplSDL2_InitForOpenGL(pWindow, nullptr);
+            ImGui_ImplSDL3_InitForOpenGL(pWindow, nullptr);
             break;
         case RENDER_DEVICE_TYPE_VULKAN:
-            ImGui_ImplSDL2_InitForVulkan(pWindow);
+            ImGui_ImplSDL3_InitForVulkan(pWindow);
             break;
         case RENDER_DEVICE_TYPE_METAL:
-            ImGui_ImplSDL2_InitForMetal(pWindow);
+            ImGui_ImplSDL3_InitForMetal(pWindow);
             break;
         case RENDER_DEVICE_TYPE_WEBGPU:
             LOG_ERROR_AND_THROW("WebGPU not supported");
@@ -71,13 +71,13 @@ ImGuiImplSDL::ImGuiImplSDL(const ImGuiDiligentCreateInfo& CI,
     }
 }
 
-ImGuiImplSDL::~ImGuiImplSDL() { ImGui_ImplSDL2_Shutdown(); }
+ImGuiImplSDL::~ImGuiImplSDL() { ImGui_ImplSDL3_Shutdown(); }
 
 void ImGuiImplSDL::NewFrame(Uint32            RenderSurfaceWidth,
                             Uint32            RenderSurfaceHeight,
                             SURFACE_TRANSFORM SurfacePreTransform)
 {
-    ImGui_ImplSDL2_NewFrame();
+    ImGui_ImplSDL3_NewFrame();
     ImGuiImplDiligent::NewFrame(RenderSurfaceWidth, RenderSurfaceHeight,
                                 SurfacePreTransform);
 }
@@ -89,7 +89,7 @@ void ImGuiImplSDL::Render(IDeviceContext* pCtx)
 
 bool ImGuiImplSDL::HandleSDLEvent(const SDL_Event* ev)
 {
-    return ImGui_ImplSDL2_ProcessEvent(ev);
+    return ImGui_ImplSDL3_ProcessEvent(ev);
 }
 
 } // namespace Diligent
